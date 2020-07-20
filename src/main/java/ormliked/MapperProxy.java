@@ -3,6 +3,7 @@ package ormliked;
 import dao.SqlManager;
 import ormliked.exception.ManyResultException;
 import ormliked.exception.SqlAnnotationNotExistException;
+import ormliked.exception.UnsupportedSqlOperationException;
 import util.LoggerManager;
 
 import java.lang.annotation.Annotation;
@@ -10,6 +11,7 @@ import java.lang.reflect.*;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -54,13 +56,51 @@ class MapperProxy<T> implements InvocationHandler {
 
         if(annotation!=null){
             Sql sql = (Sql)annotation;
-            ResultSet result= SqlManager.getStatement().executeQuery(genStatement(sql.sqlStatement(), args));
-            Class clazz = Class.forName(sql.resultType());
-            if (method.getReturnType().equals(List.class)){
-                return select(result, clazz);
-            }else {
-                return selectOne(result, clazz);
+
+            switch (sql.sqlProcess()){
+                case "select":
+                    ResultSet result= SqlManager.getStatement().executeQuery(genStatement(sql.sqlStatement(), args));
+                    Class clazz = Class.forName(sql.resultType());
+                    if (method.getReturnType().equals(List.class)){
+                        return select(result, clazz);
+                    }else {
+                        return selectOne(result, clazz);
+                    }
+
+                case "insert":
+                    if (method.getReturnType().equals(Integer.class)){
+                        SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args), Statement.RETURN_GENERATED_KEYS);
+                        ResultSet resultSet = SqlManager.getStatement().getGeneratedKeys();
+                        if (resultSet.next()){
+                            return resultSet.getInt(1);
+                        }
+                    }else if (method.getReturnType().equals(Void.TYPE)){
+                        SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args));
+                        return Void.TYPE;
+                    }else if (method.getReturnType().equals(String.class)){
+                        SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args), Statement.RETURN_GENERATED_KEYS);
+                        ResultSet resultSet = SqlManager.getStatement().getGeneratedKeys();
+                        if (resultSet.next()){
+                            return resultSet.getString(1);
+                        }
+                    }else {
+                        throw new UnsupportedSqlOperationException("the return type is unsupported");
+                    }
+                case "delete":
+                case "update":
+                    if (method.getReturnType().equals(Void.TYPE)){
+                        SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args));
+                        return Void.TYPE;
+                    }else if(method.getReturnType().equals(Integer.class)){
+                        return SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args));
+                    }else{
+                        throw new UnsupportedSqlOperationException("the return type is unsupported");
+                    }
+
+                    default:
+                        throw new UnsupportedSqlOperationException();
             }
+
         }else{
             throw new SqlAnnotationNotExistException();
         }
