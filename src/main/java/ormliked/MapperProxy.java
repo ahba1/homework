@@ -17,7 +17,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * I package the cumbersome jdbc operation in an orm liked frame
+ * package the cumbersome jdbc operation in an orm liked frame
  * it's the core of the frame
  * created by zhouliang on 2020/7/19
  * @param <T>
