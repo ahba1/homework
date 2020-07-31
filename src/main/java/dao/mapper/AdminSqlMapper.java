@@ -30,7 +30,7 @@ public interface AdminSqlMapper {
     @Sql(sqlProcess ="insert",
             sqlStatement = "insert into Admin(#{name},#{username},#{password})",
             resultType = "boolean")
-    boolean updateRegisterInfo(String name,String username,String password);
+    boolean insertRegisterInfo(String name,String username,String password);
 
 }
 
