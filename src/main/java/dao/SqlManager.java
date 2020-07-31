@@ -23,7 +23,7 @@ public class SqlManager {
     private static String user="root";
     private static  String pwd="18108045080zZ";
 
-    private AdminSqlMapper adminSqlService;
+    private static AdminSqlMapper adminSqlMapper;
 
     //静态代码块初始化JDBC配置
     static {
@@ -80,11 +80,14 @@ public class SqlManager {
         }
     }
 
-    public static AdminSqlMapper getAdminSqlService(){
-        return createService(AdminSqlMapper.class);
+    public static AdminSqlMapper getAdminSqlMapper(){
+        if (adminSqlMapper==null){
+            adminSqlMapper = createMapper(AdminSqlMapper.class);
+        }
+        return adminSqlMapper;
     }
 
-    private static <T> T createService(Class<T> tClass){
+    private static <T> T createMapper(Class<T> tClass){
 
         return SqlMapperFactory.getMapper(tClass);
     }
