@@ -22,4 +22,15 @@ public interface AdminSqlMapper {
             resultType = "pojo.Admin")
     Admin selectByPrimaryKey(Integer id);
 
+    @Sql(sqlProcess = "select",
+            sqlStatement = "select password from admin where username = #{username}",
+            resultType = "pojo.admin")
+    Admin selectPasswordByUsername(String username);
+
+    @Sql(sqlProcess ="insert",
+            sqlStatement = "insert into Admin(#{name},#{username},#{password})",
+            resultType = "boolean")
+    boolean updateRegisterInfo(String name,String username,String password);
+
 }
+
