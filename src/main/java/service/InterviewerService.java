@@ -52,4 +52,11 @@ public interface InterviewerService {
      * @return
      */
     boolean apply(Recruitment recruitment, Interviewer interviewer);
+
+    /**
+     *
+     * @param username
+     * @return
+     */
+    Interviewer query(String username);
 }

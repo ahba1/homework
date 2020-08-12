@@ -5,7 +5,7 @@ import java.sql.Date;
 public class Recruitment {
 
     private int id;
-    private Position[] positions;
+    private Position position;
     private Date startDate;
     private Date endDate;
     private int status;
@@ -18,12 +18,12 @@ public class Recruitment {
         this.id = id;
     }
 
-    public Position[] getPositions() {
-        return positions;
+    public Position getPosition() {
+        return position;
     }
 
-    public void setPositions(Position[] positions) {
-        this.positions = positions;
+    public void setPositions(Position position) {
+        this.position = position;
     }
 
     public Date getStartDate() {

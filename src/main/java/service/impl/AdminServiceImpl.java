@@ -1,12 +1,9 @@
 package service.impl;
 
-import pojo.DeliveryInfo;
 import pojo.Interviewer;
-import pojo.Position;
 import pojo.Recruitment;
 import service.AdminService;
 
-import java.sql.Date;
 import java.util.List;
 
 public class AdminServiceImpl implements AdminService {
@@ -22,22 +19,23 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Recruitment publishRecruitment(Position position, Date startDate, Date endDate) {
+    public Recruitment publishRecruitment(int position, String startDate, String endDate) {
         return null;
     }
 
     @Override
-    public List<Interviewer> screen(Recruitment recruitment) {
+    public List<Interviewer> screen(int id) {
         return null;
     }
 
     @Override
-    public void remark(DeliveryInfo info) {
+    public void remark(String interviewerUsername, int recruitment, int isRecruited, String info) {
 
     }
 
     @Override
-    public Recruitment query() {
+    public Recruitment query(int id) {
         return null;
     }
+
 }

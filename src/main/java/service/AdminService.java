@@ -37,23 +37,26 @@ public interface AdminService {
      * @param endDate
      * @return the recruitment info
      */
-    Recruitment publishRecruitment(Position position, Date startDate, Date endDate);
+    Recruitment publishRecruitment(int position, String startDate, String endDate);
 
     /**
-     * @param recruitment
+     * @param id
      * @return the interviewers who satisfy the demand
      */
-    List<Interviewer> screen(Recruitment recruitment);
+    List<Interviewer> screen(int id);
 
     /**
      *
+     * @param interviewerUsername
+     * @param recruitment
+     * @param isRecruited
      * @param info
      */
-    void remark(DeliveryInfo info);
+    void remark(String interviewerUsername, int recruitment, int isRecruited, String info);
 
     /**
      *
      * @return
      */
-    Recruitment query();
+    Recruitment query(int id);
 }

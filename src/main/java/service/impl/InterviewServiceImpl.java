@@ -33,4 +33,9 @@ public class InterviewServiceImpl implements InterviewerService {
     public boolean apply(Recruitment recruitment, Interviewer interviewer) {
         return false;
     }
+
+    @Override
+    public Interviewer query(String username) {
+        return null;
+    }
 }
