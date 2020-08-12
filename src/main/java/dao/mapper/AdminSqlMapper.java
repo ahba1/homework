@@ -22,4 +22,9 @@ public interface AdminSqlMapper {
             resultType = "pojo.Admin")
     Admin selectByPrimaryKey(Integer id);
 
+    @Sql(sqlProcess = "insert",
+            sqlStatement = "insert into admin(id) values(#{id})",
+            resultType = "java.lang.Integer")
+    Integer insert(Integer id);
+
 }

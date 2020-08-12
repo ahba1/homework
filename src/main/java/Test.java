@@ -1,6 +1,8 @@
 import controller.BaseController;
+import dao.SqlManager;
 import dao.mapper.AdminSqlMapper;
 import ormliked.SqlMapper;
+import pojo.Admin;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -20,6 +22,14 @@ public class Test {
 //        for (Method method:methods){
 //            System.out.println(method.getReturnType().equals(Void.TYPE));
 //        }
+//        try {
+//            Class clazz = Class.forName("java.lang.String");
+//            System.out.println(clazz.getName());
+//        }catch (ClassNotFoundException e){
+//            e.printStackTrace();
+//        }
+
+        System.out.println(SqlManager.getAdminSqlMapper().insert(7));
     }
 
     private void func(){

@@ -68,23 +68,21 @@ class MapperProxy<T> implements InvocationHandler {
                     }
 
                 case "insert":
-                    if (method.getReturnType().equals(Integer.class)){
-                        SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args), Statement.RETURN_GENERATED_KEYS);
-                        ResultSet resultSet = SqlManager.getStatement().getGeneratedKeys();
-                        if (resultSet.next()){
-                            return resultSet.getInt(1);
-                        }
-                    }else if (method.getReturnType().equals(Void.TYPE)){
+                    if (method.getReturnType().equals(Void.TYPE)){
                         SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args));
                         return Void.TYPE;
-                    }else if (method.getReturnType().equals(String.class)){
-                        SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args), Statement.RETURN_GENERATED_KEYS);
-                        ResultSet resultSet = SqlManager.getStatement().getGeneratedKeys();
-                        if (resultSet.next()){
-                            return resultSet.getString(1);
+                    }else{
+                        SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args));
+                        ResultSet resultSet = SqlManager.getStatement().executeQuery("select last_insert_id()");
+                        if (method.getReturnType().equals(String.class)){
+                            if (resultSet.next()){
+                                return resultSet.getString(1);
+                            }
+                        }else if (method.getReturnType().equals(Integer.class)){
+                            if (resultSet.next()){
+                                return resultSet.getInt(1);
+                            }
                         }
-                    }else {
-                        throw new UnsupportedSqlOperationException("the return type is unsupported");
                     }
                 case "delete":
                 case "update":
@@ -165,4 +163,5 @@ class MapperProxy<T> implements InvocationHandler {
             throw new ManyResultException();
         }
     }
+
 }
