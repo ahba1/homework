@@ -26,22 +26,21 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public Recruitment publishRecruitment(int position, String startDate, String endDate) {
-        return SqlManager.getAdminSqlMapper().publishRecruitment(position, startDate, String endDate)
+        return null;
     }
 
     @Override
     public List<Interviewer> screen(int id) {
-        return SqlManager.getAdminSqlMapper().screen(id);
+        return null;
     }
 
     @Override
     public void remark(String interviewerUsername, int recruitment, int isRecruited, String info) {
-        SqlManager.getAdminSqlMapper().remark(interviewerUsername,recruitment,isRecruited,info);
     }
 
     @Override
     public Recruitment query(int id) {
-        return SqlManager.getAdminSqlMapper().query(id);
+        return null;
     }
 
 }

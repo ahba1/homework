@@ -29,7 +29,7 @@ class MapperProxy<T> implements InvocationHandler {
 
     private final Class<T> mapperInterface;
 
-    private final static String PATTERN = "#\\{.*\\}";
+    private final static String PATTERN = "#\\{.*?\\}";
 
     MapperProxy(Class<T> mapperInterface){
         this.mapperInterface = mapperInterface;
@@ -72,7 +72,13 @@ class MapperProxy<T> implements InvocationHandler {
                         SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args));
                         return Void.TYPE;
                     }else{
-                        int res = SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args), Statement.RETURN_GENERATED_KEYS);
+                        String statement = genStatement(sql.sqlStatement(), args);
+                        System.out.println(sql.sqlStatement());
+                        for (Object o:args){
+                            System.out.println(o);
+                        }
+                        System.out.println(statement);
+                        int res = SqlManager.getStatement().executeUpdate(statement, Statement.RETURN_GENERATED_KEYS);
                         ResultSet resultSet = SqlManager.getStatement().getGeneratedKeys();
                         if (method.getReturnType().equals(String.class)){
                             if (resultSet.next()){
@@ -109,18 +115,21 @@ class MapperProxy<T> implements InvocationHandler {
     /**
      * this method is used to process the sql statements, replace the parameter in the statement with the parameters
      * of the invoked method
-     * @param preProcessStatement the sql statements before process
+     * @param statement the sql statements before process
      * @param args the parameters of the invoked method
      * @return the real sql statements
      */
-    private String genStatement(String preProcessStatement, Object[] args){
+    private String genStatement(String statement, Object[] args){
         if (args == null){
-            return preProcessStatement;
+            return statement;
         }
-        String result = "";
+
+        String result="";
+
         for (Object arg:args){
 
-            result = preProcessStatement.replaceFirst(PATTERN, arg.toString());
+            result = statement.replaceFirst(PATTERN, arg.toString());
+            statement = result;
         }
 
         return result;

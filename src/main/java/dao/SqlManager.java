@@ -2,6 +2,7 @@ package dao;
 
 
 import dao.mapper.AdminSqlMapper;
+import dao.mapper.InterviewerSqlMapper;
 import ormliked.SqlMapper;
 import ormliked.SqlMapperFactory;
 import util.LoggerManager;
@@ -27,6 +28,7 @@ public class SqlManager {
     private static  String pwd="18108045080zZ";
 
     private static AdminSqlMapper adminSqlMapper;
+    private static InterviewerSqlMapper interviewerSqlMapper;
 
     //静态代码块初始化JDBC配置
     static {
@@ -90,6 +92,13 @@ public class SqlManager {
             adminSqlMapper = createMapper(AdminSqlMapper.class);
         }
         return adminSqlMapper;
+    }
+
+    public static InterviewerSqlMapper getInterviewerSqlMapper(){
+        if(interviewerSqlMapper==null){
+            interviewerSqlMapper = createMapper(InterviewerSqlMapper.class);
+        }
+        return interviewerSqlMapper;
     }
 
     private static <T> T createMapper(Class<T> tClass){

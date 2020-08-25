@@ -30,7 +30,7 @@ public class Test {
 //            e.printStackTrace();
 //        }
 
-        System.out.println(SqlManager.getAdminSqlMapper().insert(10));
+        System.out.println(SqlManager.getAdminSqlMapper().insertRegisterInfo("zl","ahba1", "123456"));
         //func();
     }
 

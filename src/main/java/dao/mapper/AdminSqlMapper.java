@@ -3,7 +3,7 @@ package dao.mapper;
 import ormliked.Sql;
 import ormliked.SqlMapper;
 import pojo.Admin;
-import pojo.Password
+import pojo.Password;
 
 import java.util.List;
 
@@ -34,8 +34,9 @@ public interface AdminSqlMapper {
     Password selectPasswordByUsername(String username);
 
     @Sql(sqlProcess ="insert",
-            sqlStatement = "insert into Admin(#{name},#{username},#{password})",
-            resultType = "boolean")
-    boolean insertRegisterInfo(String name,String username,String password);
+            sqlStatement = "insert into admin(name,username,password)values('#{name}','#{username}','#{password}')",
+            resultType = "java.lang.Boolean")
+    Boolean insertRegisterInfo(String name,String username,String password);
+
 
 }

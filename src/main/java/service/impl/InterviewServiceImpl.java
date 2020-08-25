@@ -27,23 +27,20 @@ public class InterviewServiceImpl implements InterviewerService {
     }
 
     @Override
-    public List<Recruitment> query(int position, String startDate, String endDate) {
-        java.sql.Date startSqlDate = new java.sql.Date(startDate.getTime());
-        java.sql.Date endSqlDate = new java.sql.Date(endDate.getTime());
-        return SqlManager.getInterviewerSqlMapper().query(position, startSqlDate, endSqlDate) ;
+    public List<Recruitment> query(Position position, Date startDate, Date endDate) {
+        return null;
     }
 
     @Override
-    public List<Recruitment> query(int position) {
-        return SqlManager.getInterviewerSqlMapper().query(position);
+    public List<Recruitment> query(Position position) {
+        return null;
     }
 
     @Override
     public boolean apply(Recruitment recruitment, Interviewer interviewer) {
-        String inerviewerUsername=interviewer.getUsername();
-        int recruitmentID=recruitment.getId();
-        return SqlManager.getInterviewerSqlMapper().apply(inerviewerUsername,inerviewerUsername);
+        return false;
     }
+
 
     @Override
     public Interviewer query(String username) {
