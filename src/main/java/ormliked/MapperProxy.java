@@ -72,13 +72,15 @@ class MapperProxy<T> implements InvocationHandler {
                         SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args));
                         return Void.TYPE;
                     }else{
-                        SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args));
-                        ResultSet resultSet = SqlManager.getStatement().executeQuery("select last_insert_id()");
+                        int res = SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args), Statement.RETURN_GENERATED_KEYS);
+                        ResultSet resultSet = SqlManager.getStatement().getGeneratedKeys();
                         if (method.getReturnType().equals(String.class)){
                             if (resultSet.next()){
                                 return resultSet.getString(1);
                             }
-                        }else if (method.getReturnType().equals(Integer.class)){
+                        }else if (method.getReturnType().equals(Boolean.class)){
+                            return res==1;
+                        }else if(method.getReturnType().equals(Integer.class)){
                             if (resultSet.next()){
                                 return resultSet.getInt(1);
                             }

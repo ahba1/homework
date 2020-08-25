@@ -2,9 +2,12 @@ package dao;
 
 
 import dao.mapper.AdminSqlMapper;
+import ormliked.SqlMapper;
 import ormliked.SqlMapperFactory;
 import util.LoggerManager;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
@@ -27,14 +30,14 @@ public class SqlManager {
 
     //静态代码块初始化JDBC配置
     static {
-        try {
-
+        try(InputStream is = SqlManager.class.getClassLoader().getResourceAsStream("main/resources/jdbc.properties")) {
             Properties properties = new Properties();
-//            properties.load(SqlManager.class.getClassLoader().getResourceAsStream("jdbc.properties"));
-//            driver = properties.getProperty("driver");
-//            url = properties.getProperty("url");
-//            user = properties.getProperty("user");
-//            pwd = properties.getProperty("pwd");
+            //System.out.println(is);
+            //properties.load(is);
+            //driver = properties.getProperty("driver");
+            //url = properties.getProperty("url");
+            //user = properties.getProperty("user");
+            //pwd = properties.getProperty("pwd");
 
             //加载驱动
             Class.forName(driver);
@@ -48,6 +51,8 @@ public class SqlManager {
         }catch (SQLException e){
             LoggerManager.getLoggerManager().error("failed to get the connection\nreason: "+e.getMessage());
 
+        }catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

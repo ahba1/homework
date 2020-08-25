@@ -4,6 +4,7 @@ import dao.mapper.AdminSqlMapper;
 import ormliked.SqlMapper;
 import pojo.Admin;
 
+import java.io.File;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Arrays;
@@ -29,10 +30,11 @@ public class Test {
 //            e.printStackTrace();
 //        }
 
-        System.out.println(SqlManager.getAdminSqlMapper().insert(7));
+        System.out.println(SqlManager.getAdminSqlMapper().insert(10));
+        //func();
     }
 
-    private void func(){
-
+    private static void func(){
+        SqlManager.getAdminSqlMapper().selectAll();
     }
 }
