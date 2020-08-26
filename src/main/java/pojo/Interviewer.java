@@ -38,4 +38,13 @@ public class Interviewer {
     public void setPositions(Position[] positions) {
         this.positions = positions;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for(Position p:positions){
+            sb.append(p.getName()).append("\\");
+        }
+        return name+" "+username+" position: "+sb.toString();
+    }
 }

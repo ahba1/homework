@@ -49,4 +49,9 @@ public class Recruitment {
     public void setStatus(int status) {
         this.status = status;
     }
+
+    @Override
+    public String toString() {
+        return id+" "+position+" start date: "+startDate+" end date: "+endDate;
+    }
 }

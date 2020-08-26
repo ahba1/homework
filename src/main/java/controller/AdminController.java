@@ -40,4 +40,9 @@ public class AdminController {
         return ServiceManager.getAdminService()
                 .query(id);
     }
+
+    public Interviewer query(String username){
+        return ServiceManager.getAdminService()
+                .query(username);
+    }
 }

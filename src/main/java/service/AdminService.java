@@ -59,4 +59,11 @@ public interface AdminService {
      * @return
      */
     Recruitment query(int id);
+
+    /**
+     *
+     * @param username
+     * @return
+     */
+    Interviewer query(String username);
 }

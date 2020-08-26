@@ -43,4 +43,9 @@ public class AdminServiceImpl implements AdminService {
         return null;
     }
 
+    @Override
+    public Interviewer query(String username) {
+        return null;
+    }
+
 }

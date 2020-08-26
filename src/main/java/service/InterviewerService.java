@@ -1,10 +1,7 @@
 package service;
 
-import pojo.Interviewer;
-import pojo.Position;
 import pojo.Recruitment;
 
-import java.sql.Date;
 import java.util.List;
 
 /**
@@ -37,26 +34,19 @@ public interface InterviewerService {
      * @param endDate
      * @return
      */
-    List<Recruitment> query(Position position, Date startDate, Date endDate);
+    List<Recruitment> query(int position, String startDate, String endDate);
 
     /**
      *
      * @param position
      * @return
      */
-    List<Recruitment> query(Position position);
+    List<Recruitment> query(int position);
 
     /**
-     * @param recruitment
-     * @param interviewer
+     * @param recruitment the recruitment's id
+     * @param username the interviewer's username
      * @return
      */
-    boolean apply(Recruitment recruitment, Interviewer interviewer);
-
-    /**
-     *
-     * @param username
-     * @return
-     */
-    Interviewer query(String username);
+    boolean apply(int recruitment, String username);
 }
