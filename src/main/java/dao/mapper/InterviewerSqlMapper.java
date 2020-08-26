@@ -22,12 +22,18 @@ public interface InterviewerSqlMapper {
 
     @Sql(sqlProcess = "select",
             sqlStatement = "select password from Interviewer where username = #{username}",
-            resultType = "pojo.Interviewer")
-    Interviewer selectPasswordByUsername(String username);
-
+            resultType = "pojo.Password")
+    Password selectPasswordByUsername(String username);
+    
     @Sql(sqlProcess ="insert",
             sqlStatement = "insert into Interviewer(#{name},#{username},#{password})",
-            resultType = "boolean")
-    boolean insertRegisterInfo(String name,String username,String password);
-
+            resultType = "java.lang.Boolean")
+    Boolean insertRegisterInfo(String name,String username,String password);
+    
+     @Sql(sqlProcess ="select",
+            sqlStatement = "select * from recruitment where recruitment.position=position",
+            resultType = "pojo.Recruitment")
+    List<Recruitment> query(int position, String startDate, String endDate);
+    
+    
 }
