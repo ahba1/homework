@@ -35,9 +35,10 @@ public interface AdminService {
      * @param position
      * @param startDate
      * @param endDate
-     * @return the recruitment info
+     * @return boolean
      */
-    Recruitment publishRecruitment(int position, String startDate, String endDate);
+    //改
+    boolean publishRecruitment(int position, int number,String startDate, String endDate);
 
     /**
      * @param id
