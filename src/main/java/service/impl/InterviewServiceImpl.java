@@ -24,6 +24,14 @@ public class InterviewServiceImpl implements InterviewerService {
         return result;
     }
 
+        //new
+    @Override
+    public  boolean setInterviewerInfo(String username,String description){
+        boolean result=SqlManager.getInterviewerSqlMapper().insertInterviewerInfo(username,description);
+        return result;
+    }
+
+    
     @Override
     public List<Recruitment> query(int position, String startDate, String endDate) {
         SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
