@@ -4,6 +4,7 @@ import dao.SqlManager;
 import pojo.Interviewer;
 import pojo.Recruitment;
 import service.AdminService;
+import pojo.Recruitment_Max_id;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,18 +28,26 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Recruitment publishRecruitment(int position, String startDate, String endDate) {
-        SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            java.util.Date sDate = bartDateFormat.parse(startDate);
-            java.util.Date eDate = bartDateFormat.parse(endDate);
-            java.sql.Date sqlStartDate = new java.sql.Date(sDate.getTime());
-            java.sql.Date sqlEndDate = new java.sql.Date(eDate.getTime());
-        }
-        catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-        return SqlManager.getAdminSqlMapper().publishRecruitment(position,sqlStartDate,sqlEndDate);
+    public boolean publishRecruitment(int position,int number, String startDate, String endDate) {
+//        SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+//        try {
+//            java.util.Date sDate = bartDateFormat.parse(startDate);
+//            java.util.Date eDate = bartDateFormat.parse(endDate);
+//            java.sql.Date sqlStartDate = new java.sql.Date(sDate.getTime());
+//            java.sql.Date sqlEndDate = new java.sql.Date(eDate.getTime());
+//        }
+//        catch (Exception ex) {
+//            System.out.println(ex.getMessage());
+//        }
+//      return SqlManager.getAdminSqlMapper().publishRecruitment(position,sqlStartDate,sqlEndDate);
+        Recruitment_Max_id insert_id=SqlManager.getAdminSqlMapper().selectMax_id();
+        long lid=insert_id.getMax_id();
+        int id=(int)lid;
+        boolean case1=SqlManager.getAdminSqlMapper().publishRecruitment(id,position,startDate,endDate);
+        boolean case2=SqlManager.getAdminSqlMapper().insertPositionNumber(id,number,position);
+        if(case1==true &&case2==true)
+            return true;
+        else return false;
     }
 
     @Override
