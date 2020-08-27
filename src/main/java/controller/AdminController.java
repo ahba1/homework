@@ -21,9 +21,10 @@ public class AdminController {
                 .register(name, username, password);
     }
 
-    public Recruitment publishRecruitment(int position, String startDate, String endDate){
+//改
+    public boolean publishRecruitment(int position, int number, String startDate, String endDate){
         return ServiceManager.getAdminService()
-                .publishRecruitment(position, startDate, endDate);
+                .publishRecruitment(position, number, startDate, endDate);
     }
 
     public List<Interviewer> screen(int id){
