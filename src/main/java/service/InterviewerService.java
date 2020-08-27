@@ -26,6 +26,9 @@ public interface InterviewerService {
      * @return is register successful.
      */
     boolean register(String name, String username, String password);
+    
+    //new
+    boolean setInterviewerInfo(String username,String description);
 
     /**
      *
