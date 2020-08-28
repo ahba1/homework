@@ -47,9 +47,9 @@ public interface InterviewerService {
     List<Recruitment> query(int position);
 
     /**
-     * @param recruitment the recruitment's id
+     * @param recruitment_id the recruitment's id
      * @param username the interviewer's username
      * @return
      */
-    boolean apply(int recruitment, String username);
+     boolean apply(int recruitment_id, String username);
 }
