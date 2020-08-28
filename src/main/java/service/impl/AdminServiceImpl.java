@@ -14,8 +14,11 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public boolean login(String username, String password) {
-        if(SqlManager.getAdminSqlMapper().selectPasswordByUsername(username).equals(password)){
-            return true;
+        Password p=SqlManager.getAdminSqlMapper().selectPasswordByUsername(username);
+        if(p!=null){
+            if(p.getPassword().equals(password))
+                return true;
+            else return false;
         }else{
             return false;
         }
@@ -43,8 +46,9 @@ public class AdminServiceImpl implements AdminService {
         Recruitment_Max_id insert_id=SqlManager.getAdminSqlMapper().selectMax_id();
         long lid=insert_id.getMax_id();
         int id=(int)lid;
+        id++;
         boolean case1=SqlManager.getAdminSqlMapper().publishRecruitment(id,position,startDate,endDate);
-        boolean case2=SqlManager.getAdminSqlMapper().insertPositionNumber(id,number,position);
+        boolean case2=SqlManager.getAdminSqlMapper().insertPositionNumber(id,position,number);
         if(case1==true &&case2==true)
             return true;
         else return false;
@@ -54,12 +58,28 @@ public class AdminServiceImpl implements AdminService {
     public List<Interviewer> screen(int id) {
         return SqlManager.getAdminSqlMapper().screen(id);
     }
-
+//改
     @Override
-    public void remark(String interviewerUsername, int recruitment, int isRecruited, String info) {
-        SqlManager.getAdminSqlMapper().remark(interviewerUsername,recruitment,isRecruited,info);
+    public boolean hire_confirmed(String interviewerUsername, int recruitment_id, int isRecruited) {
+        if(SqlManager.getAdminSqlMapper().selectPositionNumber(recruitment_id).getNumber()>0) {
+            if (isRecruited == 1) {
+                boolean result = SqlManager.getAdminSqlMapper().updateHireInfo(recruitment_id, isRecruited, interviewerUsername);
+                boolean result1 = SqlManager.getAdminSqlMapper().updatePositionNumber(recruitment_id);
+                if (result == true && result1 == true)
+                    return true;
+                else return false;
+            } else {
+                return SqlManager.getAdminSqlMapper().updateHireInfo(recruitment_id, isRecruited, interviewerUsername);
+            }
+        }
+        else{
+            SqlManager.getAdminSqlMapper().updateFull(recruitment_id);
+            return false;
+        }
     }
 
+    
+    
     @Override
     public Recruitment query(int id) {
         return SqlManager.getAdminSqlMapper().query(id);
@@ -70,4 +90,15 @@ public class AdminServiceImpl implements AdminService {
         return SqlManager.getAdminSqlMapper().query(username);
     }
 
+    @Override
+    public  boolean deleteFull(int re_id){
+        if(SqlManager.getAdminSqlMapper().SelectByFull(re_id).getIsfull()==1)
+            return SqlManager.getAdminSqlMapper().deleteByre_id(re_id);
+        else return false;
+    }
+
+    @Override
+    public boolean delete(int re_id){
+        return SqlManager.getAdminSqlMapper().deleteByre_id(re_id);
+    }
 }
