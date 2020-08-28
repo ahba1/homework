@@ -11,8 +11,11 @@ public class InterviewServiceImpl implements InterviewerService {
 
     @Override
     public boolean login(String username, String password) {
-        if (SqlManager.getInterviewerSqlMapper().selectPasswordByUsername(username).equals(password)) {
-            return true;
+        Password p=SqlManager.getInterviewerSqlMapper().selectPasswordByUsername(username);
+        if (p!=null) {
+            if(p.getPassword().equals(password))
+                return true;
+            else return false;
         } else {
             return false;
         }
@@ -21,7 +24,10 @@ public class InterviewServiceImpl implements InterviewerService {
     @Override
     public boolean register(String name, String username, String password) {
         boolean result = SqlManager.getInterviewerSqlMapper().insertRegisterInfo(name, username, password);
-        return result;
+        boolean result1=setInterviewerInfo(username,0,0,"");
+        if(result==true&&result1==true)
+            return true;
+        else return false;
     }
 
         //new
@@ -55,7 +61,7 @@ public class InterviewServiceImpl implements InterviewerService {
 
     @Override
     public boolean apply(int recruitment, String username) {
-        return SqlManager.getInterviewerSqlMapper().apply(recruitment,username);
+         return SqlManager.getInterviewerSqlMapper().insertApplyInfo(username,recruitment_id);
     }
 
 }
