@@ -49,11 +49,11 @@ public interface AdminService {
     /**
      *
      * @param interviewerUsername
-     * @param recruitment
+     * @param recruitment_id
      * @param isRecruited
      * @param info
      */
-    void remark(String interviewerUsername, int recruitment, int isRecruited, String info);
+    boolean hire_confirmed(String interviewerUsername, int recruitment_id, int isRecruited);
 
     /**
      *
@@ -67,4 +67,8 @@ public interface AdminService {
      * @return
      */
     Interviewer query(String username);
+    
+    boolean deleteFull(int re_id);
+
+    boolean delete(int re_id);
 }
