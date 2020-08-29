@@ -97,7 +97,7 @@ public class Test {
         String password=sc.next();
         boolean res=ControllerManager.getAdminController().login(username,password);
         com=ControllerManager.getAdminController().getCompanyId(username);
-        System.out.println(com);
+//        System.out.println(com);
         if(res==false) {
             while (res != true) {
                 System.out.println("登陆失败，密码错误或者用户不存在");
@@ -157,22 +157,30 @@ public class Test {
                 delete_re(sc);
                 break;
             case 9:
-                showCompanyInfo();
+                showCompanyInfo(com);
                 break;
             case 10:
-                showCompanyRe();
+                showCompanyRe(com);
             default:
                 System.exit(0);
 
         }
     }
 
-    private static void showCompanyRe() {
-
+    private static void showCompanyRe(int com_id) {
+        System.out.println("本公司发布的所有招聘信息的id：");
+        List<Company_Re> cr=ControllerManager.getAdminController().selectCompanyRe(com_id);
+        for(Company_Re a:cr){
+            System.out.println("com_id: "+a.getCom_id()+" re_id: "+a.getRe_id());
+        }
+        admin_service();
     }
 
-    private static void showCompanyInfo() {
-        
+    private static void showCompanyInfo(int com_id) {
+        System.out.println("显示公司信息：");
+        Company c=ControllerManager.getAdminController().selectCompanyInfo(com_id);
+        System.out.println(c.getInfo());
+        admin_service();
     }
 
     private static void updateCompanyInfo(Scanner sc) {
@@ -217,8 +225,9 @@ public class Test {
         System.out.println("显示所有招聘信息：");
         List<Recruitment> re=ControllerManager.getAdminController().re_all_screen();
         for(Recruitment a:re){
-            System.out.println("re_id: "+a.getId()+" position: "+a.getPosition()+" StartDate: "
+            System.out.print("re_id: "+a.getId()+" position: "+a.getPosition()+" StartDate: "
                     +a.getStartDate()+" EndDate: "+a.getEndDate()+" isFull: "+a.getStatus());
+            System.out.println(" Position number: "+ControllerManager.getAdminController().position_num(a.getId()));
         }
         admin_service();
     }
@@ -275,7 +284,7 @@ public class Test {
     }
 
     private static void hired(Scanner sc){
-        System.out.println("输入确认雇佣信息：（状态：1：雇佣 2：未雇佣）\n面试者用户名 招聘信息id 状态 备注");
+        System.out.println("输入确认雇佣信息：（状态：1：雇佣 0：未雇佣）\n面试者用户名 招聘信息id 状态 备注");
         String username=sc.next();
         int id=sc.nextInt();
         int status=sc.nextInt();
@@ -449,7 +458,7 @@ public class Test {
         boolean res=ControllerManager.getInterviewerController().addAbilityInfo(username,position,info);
         if(res==true){
             System.out.println("添加成功！");
-            admin_service();
+            interviewer_service();
         }else{
             System.out.println("添加失败！");
             interviewer_service();
@@ -458,26 +467,31 @@ public class Test {
     }
 
     private static void apply_job(Scanner sc) {
+        System.out.println("请输入想申请面试的招聘信息id：");
         int re_id=sc.nextInt();
         boolean res=ControllerManager.getInterviewerController().apply(re_id,iver);
         if(res==true){
-            System.out.println("apply succeeded!");
+            System.out.println(" 申请成功!");
 
         }else{
-            System.out.println("error");;
+            System.out.println("申请失败！");;
         }
         interviewer_service();
     }
 
     private static void queryByPosition(Scanner sc) {
+        System.out.println("请输入想查询的职位id：");
         int position=sc.nextInt();
         List<Recruitment> res=ControllerManager.getInterviewerController().query(position);
         for(Recruitment re:res){
-            System.out.println("re_id:"+re.getId()+"position:"+re.getPosition()
-                    +"StartDate:"+re.getStartDate()+"EndDate"+re.getEndDate());
+            System.out.println("re_id: "+re.getId()+" position: "+re.getPosition()
+                    +" StartDate: "+re.getStartDate()+" EndDate: "+re.getEndDate());
         }
         interviewer_service();
 
     }
 
 }
+
+
+
