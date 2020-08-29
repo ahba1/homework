@@ -1,9 +1,7 @@
 package service;
 
-import pojo.DeliveryInfo;
-import pojo.Interviewer;
-import pojo.Position;
-import pojo.Recruitment;
+import pojo.*;
+
 
 import java.sql.Date;
 import java.util.List;
@@ -29,7 +27,10 @@ public interface AdminService {
      * @param password
      * @return is register successful.
      */
-    boolean register(String name, String username, String password);
+    boolean register(String name, String username, String password,int com_id);
+
+    boolean updateCompanyInfo(int com_id,String info);
+
 
     /**
      * @param position
@@ -38,13 +39,15 @@ public interface AdminService {
      * @return boolean
      */
     //改
-    boolean publishRecruitment(int position, int number,String startDate, String endDate);
+    boolean publishRecruitment(int position, int number,String startDate, String endDate,int com_id);
 
     /**
      * @param id
      * @return the interviewers who satisfy the demand
      */
-    List<Interviewer> screen(int id);
+    List<Apply_Info> screen(int re_id);
+
+    List<Apply_Info> screen();
 
     /**
      *
@@ -53,7 +56,7 @@ public interface AdminService {
      * @param isRecruited
      * @param info
      */
-    boolean hire_confirmed(String interviewerUsername, int recruitment_id, int isRecruited);
+    boolean hire_confirmed(String interviewerUsername, int recruitment_id, int isRecruited,String des);
 
     /**
      *
@@ -61,14 +64,21 @@ public interface AdminService {
      */
     Recruitment query(int id);
 
+    List<Recruitment> re_all_screen();
+
+    List<Interviewer_Pos> auto_select(int position);
+
     /**
      *
      * @param username
      * @return
      */
-    Interviewer query(String username);
-    
+    Interviewer_Info query_interviewer(String username);
+
     boolean deleteFull(int re_id);
 
     boolean delete(int re_id);
+
+    int getCompanyId(String username);
+
 }
