@@ -81,4 +81,12 @@ public class AdminController {
     public int getCompanyId(String username){
         return ServiceManager.getAdminService().getCompanyId(username);
     }
+    
+     public List<Company_Re> selectCompanyRe(int com_id){
+        return ServiceManager.getAdminService().selectCompanyRe(com_id);
+    }
+
+    public Company selectCompanyInfo(int com_id){
+        return ServiceManager.getAdminService().selectCompanyInfo(com_id);
+    }
 }
