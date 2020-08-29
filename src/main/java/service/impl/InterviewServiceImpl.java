@@ -1,7 +1,7 @@
 package service.impl;
 
 import dao.SqlManager;
-import pojo.Recruitment;
+import pojo.*;
 import service.InterviewerService;
 
 import java.text.SimpleDateFormat;
@@ -30,8 +30,20 @@ public class InterviewServiceImpl implements InterviewerService {
     @Override
     public boolean register(String name, String username, String password) {
         boolean result = SqlManager.getInterviewerSqlMapper().insertRegisterInfo(name, username, password);
-        boolean result1=setInterviewerInfo(username,0,0,"");
-        if(result==true&&result1==true)
+        if(result==false)
+            return false;
+        else {
+            boolean result1 = setInterviewerInfo(username, 0, 0, "");
+            if (result1 == true)
+                return true;
+            else return false;
+        }
+    }
+    
+    @Override
+    public boolean addAbilityInfo(String username,int position,String info){
+        boolean res=SqlManager.getInterviewerSqlMapper().insertAbilityInfo(username,position,info);
+        if(res==true)
             return true;
         else return false;
     }
@@ -56,18 +68,19 @@ public class InterviewServiceImpl implements InterviewerService {
         catch (Exception ex) {
             System.out.println(ex.getMessage());
         }
-        return SqlManager.getInterviewerSqlMapper().query(position,sqlStartDate,sqlEndDate);
+//         return SqlManager.getInterviewerSqlMapper().query(position,sqlStartDate,sqlEndDate);
         return null;
     }
 
-    @Override
-    public List<Recruitment> query(int position) {
-        return SqlManager.getInterviewerSqlMapper().query(position);
+       @Override
+    public boolean apply(int recruitment_id, String username) {
+        return SqlManager.getInterviewerSqlMapper().insertApplyInfo(username,recruitment_id);
     }
 
+
     @Override
-    public boolean apply(int recruitment, String username) {
-         return SqlManager.getInterviewerSqlMapper().insertApplyInfo(username,recruitment_id);
+    public Interviewer_Info show_status(String username){
+        return SqlManager.getInterviewerSqlMapper().selectByPrimaryKey(username);
     }
 
 }
