@@ -2,8 +2,9 @@ package dao.mapper;
 
 import ormliked.Sql;
 import ormliked.SqlMapper;
-import pojo.Admin;
-import pojo.Password;
+import pojo.*;
+
+import java.lang.Boolean;
 
 import java.util.List;
 
