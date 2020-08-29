@@ -22,9 +22,9 @@ public class InterviewerController {
                 .register(name, username, password);
     }
 
-    public boolean apply(int recruitment, String username){
+    public boolean apply(int recruitment_id, String username){
         return ServiceManager.getInterviewerService()
-                .apply(recruitment, username);
+                .apply(recruitment_id, username);
     }
 
     public List<Recruitment> query(int position){

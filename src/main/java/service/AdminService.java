@@ -35,9 +35,10 @@ public interface AdminService {
      * @param position
      * @param startDate
      * @param endDate
-     * @return the recruitment info
+     * @return boolean
      */
-    Recruitment publishRecruitment(int position, String startDate, String endDate);
+    //改
+    boolean publishRecruitment(int position, int number,String startDate, String endDate);
 
     /**
      * @param id
@@ -48,11 +49,11 @@ public interface AdminService {
     /**
      *
      * @param interviewerUsername
-     * @param recruitment
+     * @param recruitment_id
      * @param isRecruited
      * @param info
      */
-    void remark(String interviewerUsername, int recruitment, int isRecruited, String info);
+    boolean hire_confirmed(String interviewerUsername, int recruitment_id, int isRecruited);
 
     /**
      *
@@ -66,4 +67,8 @@ public interface AdminService {
      * @return
      */
     Interviewer query(String username);
+    
+    boolean deleteFull(int re_id);
+
+    boolean delete(int re_id);
 }

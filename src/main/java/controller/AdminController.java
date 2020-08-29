@@ -21,9 +21,10 @@ public class AdminController {
                 .register(name, username, password);
     }
 
-    public Recruitment publishRecruitment(int position, String startDate, String endDate){
+//改
+    public boolean publishRecruitment(int position, int number, String startDate, String endDate){
         return ServiceManager.getAdminService()
-                .publishRecruitment(position, startDate, endDate);
+                .publishRecruitment(position, number, startDate, endDate);
     }
 
     public List<Interviewer> screen(int id){
@@ -32,8 +33,8 @@ public class AdminController {
     }
 
     public void mark(String interviewerUsername, int recruitment, int isRecruited, String info){
-        ServiceManager.getAdminService()
-                .remark(interviewerUsername, recruitment, isRecruited, info);
+        return ServiceManager.getAdminService()
+                .hire_confirmed(interviewerUsername, recruitment, isRecruited);
     }
 
     public Recruitment query(int id){
@@ -44,5 +45,15 @@ public class AdminController {
     public Interviewer query(String username){
         return ServiceManager.getAdminService()
                 .query(username);
+    }
+    
+    public boolean deleteFull(int re_id){
+        return ServiceManager.getAdminService()
+                .deleteFull(re_id);
+    }
+
+    public boolean delete(int re_id){
+        return ServiceManager.getAdminService()
+                .delete(re_id);
     }
 }
