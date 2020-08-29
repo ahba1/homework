@@ -3,6 +3,12 @@ package service.impl;
 import service.AdminService;
 import service.InterviewerService;
 
+/**
+ * created by bianshiran on 2020/8/26
+ * @author bianshiran
+ * @version 1.0
+ */
+
 public class ServiceManager {
 
     private static AdminService adminService;

@@ -6,8 +6,13 @@ import pojo.Recruitment;
 import service.AdminService;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
+
+/**
+ * created by bianshiran on 2020/8/26
+ * @author bianshiran
+ * @version 1.0
+ */
 
 public class AdminServiceImpl implements AdminService {
 

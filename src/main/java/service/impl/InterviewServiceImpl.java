@@ -7,6 +7,12 @@ import service.InterviewerService;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
+/**
+ * created by bianshiran on 2020/8/26
+ * @author bianshiran
+ * @version 1.0
+ */
+
 public class InterviewServiceImpl implements InterviewerService {
 
     @Override
