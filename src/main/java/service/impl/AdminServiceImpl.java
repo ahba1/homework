@@ -155,4 +155,19 @@ public class AdminServiceImpl implements AdminService {
         return i;
         }
     }
+    
+    @Override
+    public List<Company_Re> selectCompanyRe(int com_id){
+        return SqlManager.getAdminSqlMapper().SelectCompanyRe(com_id);
+    }
+
+    @Override
+    public Company selectCompanyInfo(int com_id){
+        return SqlManager.getAdminSqlMapper().SelectCompanyInfo(com_id);
+    }
+    
+    @Override
+    public int position_num(int re_id){
+        return SqlManager.getAdminSqlMapper().selectPositionNumber(re_id).getNumber();
+    }
 }
