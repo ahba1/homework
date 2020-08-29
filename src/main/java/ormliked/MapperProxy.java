@@ -73,11 +73,11 @@ class MapperProxy<T> implements InvocationHandler {
                         return Void.TYPE;
                     }else{
                         String statement = genStatement(sql.sqlStatement(), args);
-                        System.out.println(sql.sqlStatement());
-                        for (Object o:args){
-                            System.out.println(o);
-                        }
-                        System.out.println(statement);
+//                         System.out.println(sql.sqlStatement());
+//                         for (Object o:args){
+//                             System.out.println(o);
+//                         }
+//                         System.out.println(statement);
                         int res = SqlManager.getStatement().executeUpdate(statement, Statement.RETURN_GENERATED_KEYS);
                         ResultSet resultSet = SqlManager.getStatement().getGeneratedKeys();
                         if (method.getReturnType().equals(String.class)){
@@ -93,19 +93,39 @@ class MapperProxy<T> implements InvocationHandler {
                         }
                     }
                 case "delete":
+                    String statement =genStatement(sql.sqlStatement(),args);
+                    int res=SqlManager.getStatement().executeUpdate(statement,Statement.RETURN_GENERATED_KEYS);
+                    if(method.getReturnType().equals(Boolean.class)){
+                        if(res==0){
+                            return false;
+                        }
+                        else return true;
+                    }
+
                 case "update":
                     if (method.getReturnType().equals(Void.TYPE)){
                         SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args));
                         return Void.TYPE;
                     }else if(method.getReturnType().equals(Integer.class)){
                         return SqlManager.getStatement().executeUpdate(genStatement(sql.sqlStatement(), args));
-                    }else{
+                    }else if(method.getReturnType().equals(Boolean.class)){
+                        String statement1 =genStatement(sql.sqlStatement(),args);
+//                        System.out.println(sql.sqlStatement());
+//                        for (Object o:args){
+//                            System.out.println(o);
+//                        }
+//                        System.out.println(statement1);
+                        int res1=SqlManager.getStatement().executeUpdate(statement1,Statement.RETURN_GENERATED_KEYS);
+                        if(res1==0){
+                            return false;
+                        }
+                        else return true;
+                    } else{
                         throw new UnsupportedSqlOperationException("the return type is unsupported");
                     }
-
-                    default:
-                        throw new UnsupportedSqlOperationException();
-            }
+                    
+                default:
+                    throw new UnsupportedSqlOperationException();
 
         }else{
             throw new SqlAnnotationNotExistException();
