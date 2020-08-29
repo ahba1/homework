@@ -3,55 +3,52 @@ package pojo;
 import java.sql.Date;
 
 public class Recruitment {
-
-    private int id;
-    private Position position;
-    private Date startDate;
-    private Date endDate;
-    private int status;
-
+    private int re_id;
+    private int position;
+    private String start_date;
+    private String end_date;
+    private int isfull;
+    
     public int getId() {
-        return id;
+        return re_id;
     }
-
+    
     public void setId(int id) {
-        this.id = id;
+        this.re_id = id;
     }
-
-    public Position getPosition() {
+    
+    public int getPosition() {
         return position;
     }
 
-    public void setPositions(Position position) {
+
+
+    public void setPositions(int position) {
         this.position = position;
     }
 
-    public Date getStartDate() {
-        return startDate;
-    }
 
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
 
-    public Date getEndDate() {
-        return endDate;
+    public String getStartDate() {
+        return start_date;
     }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
+    
+    public void setStartDate(String startDate) {
+        this.start_date = startDate;
+    }
+    
+    public String getEndDate() {
+        return end_date;
+    }
+    
+    public void setEndDate(String endDate) {
+        this.end_date = endDate;
     }
 
     public int getStatus() {
-        return status;
+        return isfull;
     }
-
+    
     public void setStatus(int status) {
-        this.status = status;
+        this.isfull = status;
     }
-
-    @Override
-    public String toString() {
-        return id+" "+position+" start date: "+startDate+" end date: "+endDate;
-    }
-}
