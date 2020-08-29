@@ -65,8 +65,14 @@ public interface AdminService {
     Recruitment query(int id);
 
     List<Recruitment> re_all_screen();
+    
+    int position_num(int re_id);
 
     List<Interviewer_Pos> auto_select(int position);
+    
+    List<Company_Re> selectCompanyRe(int com_id);
+
+    Company selectCompanyInfo(int com_id);
 
     /**
      *
