@@ -119,7 +119,7 @@ public interface AdminSqlMapper {
     Boolean insertPositionNumber(int id, int position, int number);
 
     @Sql(sqlProcess ="insert",
-            sqlStatement = "insert into position values(#{com_id},#{re_id})",
+            sqlStatement = "insert into company_re values(#{com_id},#{re_id})",
             resultType = "java.lang.Boolean")
     Boolean insertCompanyRe(int com_id, int re_id);
 
