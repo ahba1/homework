@@ -1,6 +1,6 @@
 package service;
 
-import pojo.Recruitment;
+import pojo.*;
 
 import java.util.List;
 
@@ -26,9 +26,11 @@ public interface InterviewerService {
      * @return is register successful.
      */
     boolean register(String name, String username, String password);
-    
-    //new
-    boolean setInterviewerInfo(String username,String description);
+
+//new
+    boolean setInterviewerInfo(String username,int re_id,int status,String description);
+
+    boolean addAbilityInfo(String username,int position,String info);
 
     /**
      *
@@ -51,5 +53,7 @@ public interface InterviewerService {
      * @param username the interviewer's username
      * @return
      */
-     boolean apply(int recruitment_id, String username);
+    boolean apply(int recruitment_id, String username);
+
+    Interviewer_Info show_status(String username);
 }
