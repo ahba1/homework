@@ -107,11 +107,21 @@ public interface AdminSqlMapper {
             sqlStatement = "select * from interviewer_pos where position=#{position}",
             resultType = "pojo.Interviewer_Pos")
     List<Interviewer_Pos> SelectByPosition(int position);
-
+    
     @Sql(sqlProcess ="select",
             sqlStatement = "select com_id from admin where username='#{username}'",
             resultType = "pojo.Company_id")
     Company_id SelectCompanyId(String username);
+
+    @Sql(sqlProcess ="select",
+            sqlStatement = "select * from company_re where com_id=#{com_id}",
+            resultType = "pojo.Company_Re")
+    List<Company_Re> SelectCompanyRe(int com_id);
+
+    @Sql(sqlProcess ="select",
+            sqlStatement = "select * from company where com_id=#{com_id}",
+            resultType = "pojo.Company")
+    Company SelectCompanyInfo(int com_id);
 
     @Sql(sqlProcess ="insert",
             sqlStatement = "insert into position values(#{id},#{position},#{number})",
