@@ -195,4 +195,5 @@ class MapperProxy<T> implements InvocationHandler {
         }
     }
 
+  }
 }
