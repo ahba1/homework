@@ -131,6 +131,7 @@ class MapperProxy<T> implements InvocationHandler {
             throw new SqlAnnotationNotExistException();
         }
     }
+    }
 
     /**
      * this method is used to process the sql statements, replace the parameter in the statement with the parameters
@@ -196,4 +197,4 @@ class MapperProxy<T> implements InvocationHandler {
     }
 
   }
-}
+
