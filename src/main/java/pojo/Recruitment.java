@@ -52,3 +52,4 @@ public class Recruitment {
     public void setStatus(int status) {
         this.isfull = status;
     }
+}
