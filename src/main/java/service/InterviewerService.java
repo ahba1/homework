@@ -12,14 +12,14 @@ import java.util.List;
 @Service
 public interface InterviewerService {
 
-    /**
+    /**登录
      * @param username
      * @param password
      * @return is the login successful.
      */
     boolean login(String username, String password);
 
-    /**
+    /**注册
      * @param name
      * @param username
      * @param password
@@ -27,33 +27,25 @@ public interface InterviewerService {
      */
     boolean register(String name, String username, String password);
 
-//new
+    //创建录用信息
     boolean setInterviewerInfo(String username,int re_id,int status,String description);
-
+    //添加职位能力
     boolean addAbilityInfo(String username,int position,String info);
 
-    /**
-     *
-     * @param position
-     * @param startDate
-     * @param endDate
-     * @return
-     */
-    List<Recruitment> query(int position, String startDate, String endDate);
 
-    /**
+    /**按职位id查询招聘信息
      *
      * @param position
      * @return
      */
     List<Recruitment> query(int position);
-
-    /**
+   
+    /**提交面试申请
      * @param recruitment_id the recruitment's id
      * @param username the interviewer's username
      * @return
      */
     boolean apply(int recruitment_id, String username);
-
+    //查看录用状态
     Interviewer_Info show_status(String username);
 }
