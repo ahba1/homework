@@ -48,10 +48,10 @@ public class InterviewServiceImpl implements InterviewerService {
         else return false;
     }
 
-        //new
+    //new
     @Override
-    public  boolean setInterviewerInfo(String username,String description){
-        boolean result=SqlManager.getInterviewerSqlMapper().insertInterviewerInfo(username,description);
+    public  boolean setInterviewerInfo(String username,int re_id,int status,String description){
+        boolean result=SqlManager.getInterviewerSqlMapper().insertInterviewerInfo(username,re_id,status,description);
         return result;
     }
 
@@ -72,6 +72,10 @@ public class InterviewServiceImpl implements InterviewerService {
         return null;
     }
 
+    @Override
+    public List<Recruitment> query(int position) {
+        return SqlManager.getInterviewerSqlMapper().selectByPosition(position);
+    }
        @Override
     public boolean apply(int recruitment_id, String username) {
         return SqlManager.getInterviewerSqlMapper().insertApplyInfo(username,recruitment_id);
