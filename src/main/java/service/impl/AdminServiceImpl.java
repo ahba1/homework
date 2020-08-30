@@ -74,9 +74,13 @@ public class AdminServiceImpl implements AdminService {
         }
     }
 
-    @Override
-    public List<Interviewer> screen(int id) {
-        return SqlManager.getAdminSqlMapper().screen(id);
+      @Override
+    public List<Apply_Info> screen(int re_id) {
+        return SqlManager.getAdminSqlMapper().screen(re_id);
+    }
+    //add
+    public List<Apply_Info> screen(){
+        return SqlManager.getAdminSqlMapper().screen();
     }
 //改
  @Override
@@ -119,8 +123,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Interviewer query(String username) {
-        return SqlManager.getAdminSqlMapper().query(username);
+    public Interviewer_Info query_interviewer(String username) {
+        return SqlManager.getInterviewerSqlMapper().selectByPrimaryKey(username);
     }
 
      @Override
