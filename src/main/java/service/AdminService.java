@@ -43,7 +43,7 @@ public interface AdminService {
     boolean publishRecruitment(int position, int number,String startDate, String endDate,int com_id);
 
     /**
-     * @param id
+     * @param re_id
      * @return the interviewers who satisfy the demand
      */
     List<Apply_Info> screen(int re_id);
@@ -58,11 +58,7 @@ public interface AdminService {
      */
     boolean hire_confirmed(String interviewerUsername, int recruitment_id, int isRecruited,String des);
 
-    /**按id查找招聘信息
-     *@param id
-     * @return
-     */
-    Recruitment query(int id);
+
     //查看所有招聘信息
     List<Recruitment> re_all_screen();
     //获得职位数目
