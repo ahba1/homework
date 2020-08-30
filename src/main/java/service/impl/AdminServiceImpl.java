@@ -102,11 +102,6 @@ public class AdminServiceImpl implements AdminService {
         }
     }
     
-    @Override
-    public Recruitment query(int id) {
-        //return SqlManager.getAdminSqlMapper().query(id);
-        return null;
-    }
 
     @Override
     public List<Recruitment> re_all_screen(){
