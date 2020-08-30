@@ -126,11 +126,10 @@ class MapperProxy<T> implements InvocationHandler {
                     
                 default:
                     throw new UnsupportedSqlOperationException();
-
+            }
         }else{
             throw new SqlAnnotationNotExistException();
         }
-    }
     }
 
     /**
