@@ -52,8 +52,13 @@ public class AdminController {
 //                 .query(username);
 //     }
     
+    
     public List<Recruitment> re_all_screen(){
         return ServiceManager.getAdminService().re_all_screen();
+    }
+    
+    public int position_num(int re_id){
+        return ServiceManager.getAdminService().position_num(re_id);
     }
 
     public List<Interviewer_Pos> auto_select(int position){
