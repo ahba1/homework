@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 public class InterviewServiceImpl implements InterviewerService {
-
+//登录
     @Override
     public boolean login(String username, String password) {
         Password p=SqlManager.getInterviewerSqlMapper().selectPasswordByUsername(username);
@@ -26,7 +26,7 @@ public class InterviewServiceImpl implements InterviewerService {
             return false;
         }
     }
-
+//注册
     @Override
     public boolean register(String name, String username, String password) {
         boolean result = SqlManager.getInterviewerSqlMapper().insertRegisterInfo(name, username, password);
@@ -39,7 +39,7 @@ public class InterviewServiceImpl implements InterviewerService {
             else return false;
         }
     }
-    
+//添加职位能力    
     @Override
     public boolean addAbilityInfo(String username,int position,String info){
         boolean res=SqlManager.getInterviewerSqlMapper().insertAbilityInfo(username,position,info);
@@ -48,40 +48,26 @@ public class InterviewServiceImpl implements InterviewerService {
         else return false;
     }
 
-    //new
+//创建录用信息
     @Override
     public  boolean setInterviewerInfo(String username,int re_id,int status,String description){
         boolean result=SqlManager.getInterviewerSqlMapper().insertInterviewerInfo(username,re_id,status,description);
         return result;
     }
 
-    
-    @Override
-    public List<Recruitment> query(int position, String startDate, String endDate) {
-        SimpleDateFormat bartDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            java.util.Date sDate = bartDateFormat.parse(startDate);
-            java.util.Date eDate = bartDateFormat.parse(endDate);
-            java.sql.Date sqlStartDate = new java.sql.Date(sDate.getTime());
-            java.sql.Date sqlEndDate = new java.sql.Date(eDate.getTime());
-        }
-        catch (Exception ex) {
-            System.out.println(ex.getMessage());
-        }
-//         return SqlManager.getInterviewerSqlMapper().query(position,sqlStartDate,sqlEndDate);
-        return null;
-    }
 
+//按职位id查找所有招聘信息
     @Override
     public List<Recruitment> query(int position) {
         return SqlManager.getInterviewerSqlMapper().selectByPosition(position);
     }
+//提交面试信息    
        @Override
     public boolean apply(int recruitment_id, String username) {
         return SqlManager.getInterviewerSqlMapper().insertApplyInfo(username,recruitment_id);
     }
 
-
+//显示录用状态
     @Override
     public Interviewer_Info show_status(String username){
         return SqlManager.getInterviewerSqlMapper().selectByPrimaryKey(username);
