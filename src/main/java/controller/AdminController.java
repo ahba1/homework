@@ -47,10 +47,10 @@ public class AdminController {
                 .query(id);
     }
 
-    public Interviewer query(String username){
-        return ServiceManager.getAdminService()
-                .query(username);
-    }
+//     public Interviewer query(String username){
+//         return ServiceManager.getAdminService()
+//                 .query(username);
+//     }
     
     public List<Recruitment> re_all_screen(){
         return ServiceManager.getAdminService().re_all_screen();
