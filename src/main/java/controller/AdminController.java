@@ -65,7 +65,7 @@ public class AdminController {
     public int position_num(int re_id){
         return ServiceManager.getAdminService().position_num(re_id);
     }
-//按职位id查找所有招聘信息
+//按职位id查找所有适合招聘的面试者
     public List<Interviewer_Pos> auto_select(int position){
         return ServiceManager.getAdminService().auto_select(position);
     }
